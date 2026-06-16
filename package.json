@@ -8,7 +8,7 @@
     "build": "node tools/build-static.mjs",
     "phone:preview": "node tools/start-phone-preview.mjs",
     "secure-preview": "node tools/secure-preview.mjs",
-    "check": "node --check src/main.js"
+    "check": "node --check src/main.js && node --check src/worker.js"
   },
   "devDependencies": {
     "wrangler": "^4.100.0"

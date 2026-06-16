@@ -22,15 +22,15 @@ npm run phone:preview
 
 手机保持小火箭开启，打开终端里的 Cloudflare 链接，输入分享码即可。详细说明见 [docs/phone-preview.md](./docs/phone-preview.md)。
 
-## 发布到 Cloudflare Pages
+## 发布到 Cloudflare Workers
 
-Cloudflare Pages 项目 `codex-web-game001` 已连接 GitHub 仓库 `chinnkenni/codex_web_game001`。
+Cloudflare Worker 应用 `codex-web-game001` 使用 Static Assets 承载游戏文件，并连接 GitHub 仓库 `chinnkenni/codex_web_game001`。
 
 - 生产分支：`main`
 - 构建命令：`npm run build`
-- 发布目录：`dist`
+- 静态资源目录：`dist`
 
-之后只要把变更推送到 GitHub，Cloudflare Pages 会自动构建和发布。项目是纯静态页面，后续不需要数据库或服务器即可部署。
+之后只要把变更推送到 GitHub，Cloudflare Workers Builds 会自动构建和发布。项目是纯静态页面，后续不需要数据库或服务器即可部署。
 
 ## 第一版范围
 
