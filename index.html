@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="雾港三小时。短局避难叙事游戏。"
+    />
+    <title>雾港三小时</title>
+    <link rel="stylesheet" href="./src/styles.css?v=0.5.3" />
+  </head>
+  <body>
+    <div id="app" class="app-shell">
+      <header class="topbar" aria-label="游戏状态栏">
+        <div class="brand-mark" aria-hidden="true">
+          <img src="./assets/window.svg" alt="" />
+        </div>
+        <div class="brand-copy">
+          <p class="eyebrow">Witch Keni / AI Game 01</p>
+          <h1>雾港三小时</h1>
+        </div>
+        <div class="top-actions">
+          <button id="topMenuButton" class="icon-button" type="button" title="打开菜单" aria-label="打开菜单">
+            ≡
+          </button>
+        </div>
+        <div id="topMenuPanel" class="top-menu-panel" hidden>
+          <section class="top-menu-section">
+            <div id="menuInventoryPanel"></div>
+          </section>
+          <section class="top-menu-section">
+            <div id="menuEchoPanel"></div>
+          </section>
+          <section class="top-menu-section">
+            <div class="top-menu-title">系统弹窗</div>
+            <div class="menu-actions">
+              <button id="loreButton" class="menu-button" type="button">背景说明</button>
+              <button id="archiveButton" class="menu-button" type="button">痕迹档案</button>
+            </div>
+          </section>
+          <section class="top-menu-section">
+            <div class="top-menu-title">游戏设置</div>
+            <div class="menu-actions">
+              <button id="audioButton" class="menu-button" type="button">开启氛围音</button>
+              <button id="newLoopButton" class="menu-button" type="button">重新开始</button>
+              <button id="clearEchoButton" class="menu-button danger" type="button">清除本机痕迹</button>
+            </div>
+          </section>
+        </div>
+      </header>
+
+      <main class="game-layout">
+        <section class="left-pane" aria-label="当前状态">
+          <div class="timer-panel">
+            <div class="timer-head">
+              <div class="timer-label">封锁倒计时</div>
+            </div>
+            <div id="timerValue" class="timer-value">3h</div>
+            <div id="loopValue" class="loop-value">目标：进入地下避难层</div>
+            <div id="heatPanel" class="heat-panel"></div>
+          </div>
+
+          <div id="statsPanel" class="stats-panel"></div>
+          <div id="inventoryPanel" class="inventory-panel"></div>
+          <div id="echoPanel" class="echo-panel"></div>
+        </section>
+
+        <section class="center-pane" aria-label="游戏主区域">
+          <div class="visual-panel">
+            <div class="scene-art" aria-hidden="true">
+              <img src="./assets/window.svg" alt="" />
+            </div>
+            <div id="mapGrid" class="map-grid" aria-label="避难所地图"></div>
+          </div>
+
+          <div class="story-panel">
+            <div id="phasePill" class="phase-pill">准备阶段</div>
+            <h2 id="sceneTitle">醒来</h2>
+            <p id="storyText"></p>
+          </div>
+
+          <div id="actionsPanel" class="actions-panel" aria-label="可选行动"></div>
+        </section>
+
+        <aside class="right-pane" aria-label="现场记录">
+          <div id="runLog" class="log-panel"></div>
+          <div id="archivePanel" class="archive-panel"></div>
+        </aside>
+      </main>
+
+      <div id="loreModal" class="modal-backdrop" hidden>
+        <section class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="loreTitle">
+          <div class="modal-heading">
+            <h2 id="loreTitle">雾港封控简报</h2>
+            <button id="closeLoreButton" class="icon-button" type="button" aria-label="关闭背景说明">×</button>
+          </div>
+          <div class="lore-content">
+            <p>雾港东区在上午九点进入封控清洗倒计时。地下避难层只会在最后窗口短暂开启，你需要在三小时内带着足够理由抵达门前。</p>
+            <dl>
+              <div><dt>倒计时</dt><dd>时间归零时，封锁线合拢。没有入层，就只能留下新的痕迹。</dd></div>
+              <div><dt>线索</dt><dd>路线、节拍、通行规律。线索越多，关键行动越稳，也越接近真正的门。</dd></div>
+              <div><dt>警觉</dt><dd>巡检灯、噪声和目击者正在多注意你。警觉越高，检定越容易被压低；花时间移动会让警觉慢慢冷却。</dd></div>
+              <div><dt>属性</dt><dd>体力、补给、意志、隐蔽都会参与事件检定。任一项归零，本局都会崩盘。</dd></div>
+              <div><dt>道具</dt><dd>水、粮、工具和通行物。它们能支付代价，也会占用携带空间。</dd></div>
+              <div><dt>征兆</dt><dd>短波、旧照片、异常钥匙之类的东西。它们更像房子递来的暗示。</dd></div>
+              <div><dt>痕迹</dt><dd>上一条路线留下的便签、刻痕和习惯。它们不会明说真相，只会让下一次更熟悉。</dd></div>
+            </dl>
+          </div>
+        </section>
+      </div>
+
+      <div id="settlementModal" class="modal-backdrop" hidden>
+        <section class="modal-panel settlement-panel" role="dialog" aria-modal="true" aria-labelledby="settlementTitle">
+          <div class="modal-heading">
+            <h2 id="settlementTitle">本局结算</h2>
+            <button id="closeSettlementButton" class="icon-button" type="button" aria-label="关闭结算">×</button>
+          </div>
+          <div id="settlementContent" class="settlement-content"></div>
+        </section>
+      </div>
+
+      <div id="feedbackModal" class="modal-backdrop feedback-backdrop" hidden>
+        <section class="modal-panel feedback-panel" role="dialog" aria-modal="true" aria-labelledby="feedbackTitle">
+          <div class="modal-heading">
+            <h2 id="feedbackTitle">事件回执</h2>
+            <button id="closeFeedbackButton" class="icon-button" type="button" aria-label="关闭事件回执">×</button>
+          </div>
+          <div id="feedbackContent" class="feedback-content"></div>
+        </section>
+      </div>
+
+      <div id="archiveModal" class="modal-backdrop" hidden>
+        <section class="modal-panel archive-modal-panel" role="dialog" aria-modal="true" aria-labelledby="archiveTitle">
+          <div class="modal-heading">
+            <h2 id="archiveTitle">痕迹档案</h2>
+            <button id="closeArchiveButton" class="icon-button" type="button" aria-label="关闭痕迹档案">×</button>
+          </div>
+          <div id="archiveModalContent" class="archive-modal-content"></div>
+        </section>
+      </div>
+    </div>
+
+    <script type="module" src="./src/main.js?v=0.5.3"></script>
+  </body>
+</html>
