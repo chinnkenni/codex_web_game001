@@ -1,6 +1,6 @@
 {
   "name": "doomsday-echo-web",
-  "version": "0.1.0",
+  "version": "0.9.25",
   "private": true,
   "type": "module",
   "scripts": {

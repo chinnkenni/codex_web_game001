@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="旧城回身剧情开发后台，用于审阅剧情文案、路线节奏和代入感。"
+    />
+    <title>旧城回身｜剧情开发后台</title>
+    <link rel="stylesheet" href="./src/story-dev.css?v=0.9.25" />
+  </head>
+  <body>
+    <div class="admin-shell">
+      <header class="admin-topbar">
+        <a class="back-link" href="./index.html" aria-label="返回游戏">←</a>
+        <div class="brand-mark" aria-hidden="true">
+          <img src="./assets/old-city-hero.png" alt="" />
+        </div>
+        <div class="brand-copy">
+          <p class="eyebrow">Story Development Console</p>
+          <h1>旧城回身｜剧情开发后台</h1>
+        </div>
+        <div class="top-status">
+          <span>版本 0.9.25</span>
+          <strong>可审阅</strong>
+        </div>
+      </header>
+
+      <main class="admin-layout">
+        <aside class="left-rail" aria-label="剧情目录">
+          <nav id="storyNav" class="story-nav"></nav>
+          <section class="review-draft-panel">
+            <div class="section-heading">
+              <h2>审阅草稿</h2>
+              <div class="draft-actions">
+                <button id="copyBriefButton" class="small-button" type="button">复制摘要</button>
+                <button id="clearDraftButton" class="small-button danger" type="button">清空草稿</button>
+              </div>
+            </div>
+            <div id="draftSummary" class="draft-summary"></div>
+          </section>
+        </aside>
+
+        <section class="workbench" aria-label="剧情研发工作台">
+          <section class="story-bible-band">
+            <div>
+              <p class="eyebrow">核心方案</p>
+              <h2 id="pitchTitle"></h2>
+              <p id="pitchBody" class="pitch-body"></p>
+            </div>
+            <div id="coreMetrics" class="metric-grid"></div>
+          </section>
+
+          <section class="review-console">
+            <div class="section-heading">
+              <h2>代入感审阅</h2>
+              <span id="reviewScoreLabel" class="score-label"></span>
+            </div>
+            <div id="reviewSliders" class="review-sliders"></div>
+            <label class="review-note-label" for="globalReviewNote">总体批注</label>
+            <textarea id="globalReviewNote" class="review-note" rows="4" placeholder="写下你对玩家代入感、恐怖压迫、动机清晰度的直觉判断。"></textarea>
+          </section>
+
+          <section class="chapter-board">
+            <div class="section-heading">
+              <h2>章节路线</h2>
+              <span>3 小时 / 5 层推进 / 8-12 次关键选择</span>
+            </div>
+            <div id="chapterTimeline" class="chapter-timeline"></div>
+          </section>
+
+          <section class="world-rule-board">
+            <div class="section-heading">
+              <h2>怪异规则</h2>
+              <span>本命怪异 / 人性劣根 / 收容逻辑</span>
+            </div>
+            <div id="worldRuleList" class="world-rule-list"></div>
+          </section>
+
+          <section class="story-spine-board">
+            <div class="section-heading">
+              <h2>主线脉络</h2>
+              <span>玩家理解 / 暗线推进 / 回执图像</span>
+            </div>
+            <div id="storySpineList" class="story-spine-list"></div>
+          </section>
+
+          <section class="content-grid">
+            <section class="content-panel">
+              <div class="section-heading">
+                <h2>角色与关系</h2>
+                <span>玩家能抓住的人</span>
+              </div>
+              <div id="characterList" class="character-list"></div>
+            </section>
+
+            <section class="content-panel">
+              <div class="section-heading">
+                <h2>真相层</h2>
+                <span>逐局释放</span>
+              </div>
+              <div id="truthLayers" class="truth-list"></div>
+            </section>
+          </section>
+
+          <section class="event-workbench">
+            <div class="section-heading event-heading">
+              <div>
+                <h2>节点事件文案</h2>
+                <span>按地点检查：动机、感官、选择压力和回执</span>
+              </div>
+              <label class="filter-label" for="nodeFilter">
+                <span>地点</span>
+                <select id="nodeFilter"></select>
+              </label>
+            </div>
+            <div id="nodeOverview" class="node-overview"></div>
+            <div id="eventList" class="event-list"></div>
+          </section>
+
+          <section class="ending-board">
+            <div class="section-heading">
+              <h2>结局与回声</h2>
+              <span>短局后的情绪钩子</span>
+            </div>
+            <div id="endingList" class="ending-list"></div>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="./src/story-dev-rewrite.js?v=0.9.25"></script>
+  </body>
+</html>

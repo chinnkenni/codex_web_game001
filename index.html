@@ -5,22 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="雾港三小时。短局避难叙事游戏。"
+      content="旧城回身。短局旧城民俗恐怖叙事游戏。"
     />
-    <title>雾港三小时</title>
-    <link rel="stylesheet" href="./src/styles.css?v=0.5.3" />
+    <title>旧城回身</title>
+    <link rel="stylesheet" href="./src/styles.css?v=0.9.25" />
   </head>
   <body>
-    <div id="app" class="app-shell">
+    <section id="landingScreen" class="landing-screen" aria-label="旧城回身首页">
+      <img class="landing-bg" src="./assets/old-city-hero.png" alt="" />
+      <div class="landing-content">
+        <p class="eyebrow">Witch Keni / AI Game 01</p>
+        <h1>旧城回身</h1>
+        <p class="landing-lede">
+          三小时后，雾港会被旧城吞回过去。沈砚只发来一张壁画：画里的失踪君王，长着你的脸。
+        </p>
+        <div class="landing-brief">
+          <p>白塔局断讯，外城、内城、死城一层层压上现代街区，所有出口只剩内城密道。</p>
+          <p>你从小查不到父母、籍贯和任何亲缘，现在童谣、铜钥和令帖却全都认得你。</p>
+          <p>想逃出雾港，先弄明白：你是被搭档叫回来的调查员，还是旧城等了很多年的王。</p>
+        </div>
+        <div class="landing-actions">
+          <button id="startGameButton" class="landing-start" type="button">开始游戏</button>
+          <span>短局叙事 / 单机痕迹 / 约 15 分钟</span>
+        </div>
+      </div>
+    </section>
+
+    <div id="app" class="app-shell" hidden>
       <header class="topbar" aria-label="游戏状态栏">
         <div class="brand-mark" aria-hidden="true">
-          <img src="./assets/window.svg" alt="" />
+          <img src="./assets/old-city-hero.png" alt="" />
         </div>
         <div class="brand-copy">
           <p class="eyebrow">Witch Keni / AI Game 01</p>
-          <h1>雾港三小时</h1>
+          <h1>旧城回身</h1>
         </div>
         <div class="top-actions">
+          <button id="audioButton" class="audio-button" type="button" title="开启音效与配音" aria-label="开启音效与配音" aria-pressed="false">
+            <svg class="audio-icon audio-icon-on" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M11 5 6 9H3v6h3l5 4V5Z"></path>
+              <path d="M15 9.5a4 4 0 0 1 0 5"></path>
+              <path d="M18 7a8 8 0 0 1 0 10"></path>
+            </svg>
+            <svg class="audio-icon audio-icon-off" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M11 5 6 9H3v6h3l5 4V5Z"></path>
+              <path d="M20 4 4 20"></path>
+            </svg>
+          </button>
           <button id="topMenuButton" class="icon-button" type="button" title="打开菜单" aria-label="打开菜单">
             ≡
           </button>
@@ -33,16 +64,19 @@
             <div id="menuEchoPanel"></div>
           </section>
           <section class="top-menu-section">
+            <div id="menuRunLogPanel"></div>
+          </section>
+          <section class="top-menu-section">
             <div class="top-menu-title">系统弹窗</div>
             <div class="menu-actions">
               <button id="loreButton" class="menu-button" type="button">背景说明</button>
               <button id="archiveButton" class="menu-button" type="button">痕迹档案</button>
+              <a class="menu-button" href="./story-dev.html">剧情后台</a>
             </div>
           </section>
           <section class="top-menu-section">
             <div class="top-menu-title">游戏设置</div>
             <div class="menu-actions">
-              <button id="audioButton" class="menu-button" type="button">开启氛围音</button>
               <button id="newLoopButton" class="menu-button" type="button">重新开始</button>
               <button id="clearEchoButton" class="menu-button danger" type="button">清除本机痕迹</button>
             </div>
@@ -57,8 +91,8 @@
               <div class="timer-label">封锁倒计时</div>
             </div>
             <div id="timerValue" class="timer-value">3h</div>
-            <div id="loopValue" class="loop-value">目标：进入地下避难层</div>
-            <div id="heatPanel" class="heat-panel"></div>
+            <div id="loopValue" class="loop-value">目标：抵达内城密道</div>
+            <div id="awakeningPanel" class="heat-panel"></div>
           </div>
 
           <div id="statsPanel" class="stats-panel"></div>
@@ -69,15 +103,15 @@
         <section class="center-pane" aria-label="游戏主区域">
           <div class="visual-panel">
             <div class="scene-art" aria-hidden="true">
-              <img src="./assets/window.svg" alt="" />
+              <img id="sceneArtImage" src="./assets/old-city-hero.png" alt="" />
             </div>
-            <div id="mapGrid" class="map-grid" aria-label="避难所地图"></div>
+            <div id="mapGrid" class="map-grid" aria-label="旧城路线"></div>
           </div>
 
           <div class="story-panel">
             <div id="phasePill" class="phase-pill">准备阶段</div>
             <h2 id="sceneTitle">醒来</h2>
-            <p id="storyText"></p>
+            <div id="storyText" class="story-text"></div>
           </div>
 
           <div id="actionsPanel" class="actions-panel" aria-label="可选行动"></div>
@@ -92,19 +126,20 @@
       <div id="loreModal" class="modal-backdrop" hidden>
         <section class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="loreTitle">
           <div class="modal-heading">
-            <h2 id="loreTitle">雾港封控简报</h2>
+            <h2 id="loreTitle">白塔局断讯</h2>
             <button id="closeLoreButton" class="icon-button" type="button" aria-label="关闭背景说明">×</button>
           </div>
           <div class="lore-content">
-            <p>雾港东区在上午九点进入封控清洗倒计时。地下避难层只会在最后窗口短暂开启，你需要在三小时内带着足够理由抵达门前。</p>
+            <p>雾港在上午九点进入弃城封锁倒计时。白塔局确认「旧城回身」收容失败：现代街区正在被外城、内城、死城三段旧时古城覆盖。三小时后隔离线合拢，留在城里的人会被旧城归档成失踪。</p>
             <dl>
-              <div><dt>倒计时</dt><dd>时间归零时，封锁线合拢。没有入层，就只能留下新的痕迹。</dd></div>
-              <div><dt>线索</dt><dd>路线、节拍、通行规律。线索越多，关键行动越稳，也越接近真正的门。</dd></div>
-              <div><dt>警觉</dt><dd>巡检灯、噪声和目击者正在多注意你。警觉越高，检定越容易被压低；花时间移动会让警觉慢慢冷却。</dd></div>
-              <div><dt>属性</dt><dd>体力、补给、意志、隐蔽都会参与事件检定。任一项归零，本局都会崩盘。</dd></div>
-              <div><dt>道具</dt><dd>水、粮、工具和通行物。它们能支付代价，也会占用携带空间。</dd></div>
-              <div><dt>征兆</dt><dd>短波、旧照片、异常钥匙之类的东西。它们更像房子递来的暗示。</dd></div>
-              <div><dt>痕迹</dt><dd>上一条路线留下的便签、刻痕和习惯。它们不会明说真相，只会让下一次更熟悉。</dd></div>
+              <div><dt>倒计时</dt><dd>时间归零时，弃城封锁完成。没有抵达内城密道，就只能成为下一次【归位】里的痕迹。</dd></div>
+              <div><dt>线索</dt><dd>童谣、短波、壁画和旧令。线索越多，越接近内城密道，也越接近你自己的真相。</dd></div>
+              <div><dt>觉醒</dt><dd>【归位】会在抑制与觉醒之间摆动。越靠近觉醒，强行归位越顺手，抑制类选择越容易被锁住。</dd></div>
+              <div><dt>属性</dt><dd>力量、敏捷、智力、意志分为肉体和精神两类。需要判定时，每点对应 1 颗骰，每颗骰子取值 1-12，合计达到需求即通过。任一项归零，本局都会崩盘。</dd></div>
+              <div><dt>道具</dt><dd>水、粮、工具和旧城通行物。它们能支付代价，也会占用携带空间。</dd></div>
+              <div><dt>征兆</dt><dd>短波、壁画残照、异常钥匙之类的东西。它们像旧城在提醒你归位。</dd></div>
+              <div><dt>本命怪异</dt><dd>每个人一生只能支配一种怪异。怪异的劣化不是腐蚀人性，而是被人性里最肮脏的执念喂大。</dd></div>
+              <div><dt>痕迹</dt><dd>上一些选择留下的便签、刻痕和习惯。它们不会明说真相，只会让下一次更熟悉。</dd></div>
             </dl>
           </div>
         </section>
@@ -120,11 +155,17 @@
         </section>
       </div>
 
+      <div id="judgmentModal" class="modal-backdrop judgment-backdrop" hidden>
+        <section class="modal-panel judgment-panel" role="dialog" aria-modal="true" aria-labelledby="judgmentTitle">
+          <div id="judgmentContent" class="judgment-content"></div>
+        </section>
+      </div>
+
       <div id="feedbackModal" class="modal-backdrop feedback-backdrop" hidden>
         <section class="modal-panel feedback-panel" role="dialog" aria-modal="true" aria-labelledby="feedbackTitle">
+          <button id="feedbackCloseButton" class="feedback-close-button" type="button" aria-label="关闭事件回执">×</button>
           <div class="modal-heading">
             <h2 id="feedbackTitle">事件回执</h2>
-            <button id="closeFeedbackButton" class="icon-button" type="button" aria-label="关闭事件回执">×</button>
           </div>
           <div id="feedbackContent" class="feedback-content"></div>
         </section>
@@ -141,6 +182,6 @@
       </div>
     </div>
 
-    <script type="module" src="./src/main.js?v=0.5.3"></script>
+    <script type="module" src="./src/main.js?v=0.9.25"></script>
   </body>
 </html>
