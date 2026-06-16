@@ -22,6 +22,15 @@ npm run phone:preview
 
 手机保持小火箭开启，打开终端里的 Cloudflare 链接，输入分享码即可。详细说明见 [docs/phone-preview.md](./docs/phone-preview.md)。
 
+## 发布到 Cloudflare Pages
+
+```bash
+npm run build
+npx wrangler pages deploy dist --project-name codex-web-game001 --branch main
+```
+
+项目是纯静态页面，发布目录是 `dist/`。Cloudflare Pages 配置在 `wrangler.jsonc`，后续不需要数据库或服务器即可部署。
+
 ## 第一版范围
 
 - 静态 Web 游戏，无数据库、无账号。

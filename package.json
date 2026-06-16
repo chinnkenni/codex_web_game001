@@ -5,8 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "python3 -m http.server 4173 --bind 127.0.0.1",
+    "build": "node tools/build-static.mjs",
     "phone:preview": "node tools/start-phone-preview.mjs",
     "secure-preview": "node tools/secure-preview.mjs",
     "check": "node --check src/main.js"
+  },
+  "devDependencies": {
+    "wrangler": "^4.100.0"
   }
 }
