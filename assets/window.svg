@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420" role="img" aria-label="封锁前的城市窗景">
+  <defs>
+    <linearGradient id="sky" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#17202f"/>
+      <stop offset="0.62" stop-color="#26384a"/>
+      <stop offset="1" stop-color="#4b4a45"/>
+    </linearGradient>
+    <linearGradient id="room" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#23272c"/>
+      <stop offset="1" stop-color="#141518"/>
+    </linearGradient>
+    <filter id="soft">
+      <feGaussianBlur stdDeviation="1.6"/>
+    </filter>
+  </defs>
+  <rect width="720" height="420" fill="url(#room)"/>
+  <rect x="56" y="38" width="608" height="276" rx="8" fill="#0b0f14"/>
+  <rect x="74" y="54" width="572" height="244" rx="4" fill="url(#sky)"/>
+  <path d="M74 252 C160 215 224 238 310 210 C405 180 470 220 646 170 L646 298 L74 298 Z" fill="#202a31"/>
+  <path d="M74 280 C170 250 220 270 318 240 C450 200 516 245 646 204 L646 298 L74 298 Z" fill="#111a20"/>
+  <g fill="#1b2329">
+    <rect x="104" y="160" width="44" height="138"/>
+    <rect x="166" y="126" width="62" height="172"/>
+    <rect x="256" y="148" width="46" height="150"/>
+    <rect x="334" y="116" width="72" height="182"/>
+    <rect x="444" y="154" width="54" height="144"/>
+    <rect x="530" y="132" width="86" height="166"/>
+  </g>
+  <g fill="#d7b56d" opacity=".64" filter="url(#soft)">
+    <rect x="117" y="183" width="8" height="9"/>
+    <rect x="139" y="216" width="8" height="9"/>
+    <rect x="184" y="150" width="9" height="9"/>
+    <rect x="207" y="196" width="9" height="9"/>
+    <rect x="271" y="172" width="8" height="9"/>
+    <rect x="359" y="145" width="10" height="9"/>
+    <rect x="382" y="211" width="10" height="9"/>
+    <rect x="464" y="178" width="8" height="9"/>
+    <rect x="558" y="160" width="10" height="9"/>
+    <rect x="590" y="220" width="10" height="9"/>
+  </g>
+  <path d="M362 54 L362 298 M74 176 L646 176" stroke="#0b0f14" stroke-width="14"/>
+  <path d="M360 54 L360 298 M74 176 L646 176" stroke="#29323b" stroke-width="3" opacity=".8"/>
+  <rect x="56" y="38" width="608" height="276" rx="8" fill="none" stroke="#333a42" stroke-width="8"/>
+  <rect x="92" y="330" width="214" height="34" rx="4" fill="#332621"/>
+  <rect x="116" y="318" width="40" height="30" rx="3" fill="#72423c"/>
+  <rect x="158" y="320" width="38" height="28" rx="3" fill="#65513d"/>
+  <rect x="520" y="322" width="72" height="44" rx="5" fill="#1e2227"/>
+  <circle cx="556" cy="344" r="16" fill="#d3c6aa"/>
+  <path d="M556 331 L556 345 L568 345" stroke="#4b4a45" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M60 382 L668 382" stroke="#3b3f42" stroke-width="6"/>
+</svg>
