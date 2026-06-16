@@ -24,12 +24,13 @@ npm run phone:preview
 
 ## 发布到 Cloudflare Pages
 
-```bash
-npm run build
-npx wrangler pages deploy dist --project-name codex-web-game001 --branch main
-```
+Cloudflare Pages 项目 `codex-web-game001` 已连接 GitHub 仓库 `chinnkenni/codex_web_game001`。
 
-项目是纯静态页面，发布目录是 `dist/`。Cloudflare Pages 配置在 `wrangler.jsonc`，后续不需要数据库或服务器即可部署。
+- 生产分支：`main`
+- 构建命令：`npm run build`
+- 发布目录：`dist`
+
+之后只要把变更推送到 GitHub，Cloudflare Pages 会自动构建和发布。项目是纯静态页面，后续不需要数据库或服务器即可部署。
 
 ## 第一版范围
 
