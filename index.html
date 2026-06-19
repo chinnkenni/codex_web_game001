@@ -8,7 +8,7 @@
       content="旧城回身。短局旧城民俗恐怖叙事游戏。"
     />
     <title>旧城回身</title>
-    <link rel="stylesheet" href="./src/styles.css?v=0.9.25" />
+    <link rel="stylesheet" href="./src/styles.css?v=0.9.45" />
   </head>
   <body>
     <section id="landingScreen" class="landing-screen" aria-label="旧城回身首页">
@@ -17,16 +17,17 @@
         <p class="eyebrow">Witch Keni / AI Game 01</p>
         <h1>旧城回身</h1>
         <p class="landing-lede">
-          三小时后，雾港会被旧城吞回过去。沈砚只发来一张壁画：画里的失踪君王，长着你的脸。
+          三小时后，雾港会被旧城吞回过去。沈砚只发来一张壁画：被刮掉的脸，在闪回里像你。
         </p>
         <div class="landing-brief">
           <p>白塔局断讯，外城、内城、死城一层层压上现代街区，所有出口只剩内城密道。</p>
           <p>你从小查不到父母、籍贯和任何亲缘，现在童谣、铜钥和令帖却全都认得你。</p>
-          <p>想逃出雾港，先弄明白：你是被搭档叫回来的调查员，还是旧城等了很多年的王。</p>
+          <p>想逃出雾港，先弄明白：你是被搭档叫回来的调查员，还是旧城等了很久的空位。</p>
         </div>
         <div class="landing-actions">
           <button id="startGameButton" class="landing-start" type="button">开始游戏</button>
-          <span>短局叙事 / 单机痕迹 / 约 15 分钟</span>
+          <button id="landingClueButton" class="landing-clue" type="button">查看线索脉络图</button>
+          <span class="landing-action-note">短局叙事 / 单机痕迹 / 约 15 分钟</span>
         </div>
       </div>
     </section>
@@ -41,6 +42,14 @@
           <h1>旧城回身</h1>
         </div>
         <div class="top-actions">
+          <button id="topClueButton" class="clue-nav-button" type="button" title="打开线索脉络" aria-label="打开线索脉络">
+            <span class="clue-path-icon" aria-hidden="true">
+              <i></i>
+              <i></i>
+              <i></i>
+            </span>
+            <span class="clue-nav-label">线索脉络</span>
+          </button>
           <button id="audioButton" class="audio-button" type="button" title="开启音效与配音" aria-label="开启音效与配音" aria-pressed="false">
             <svg class="audio-icon audio-icon-on" viewBox="0 0 24 24" aria-hidden="true">
               <path d="M11 5 6 9H3v6h3l5 4V5Z"></path>
@@ -70,6 +79,7 @@
             <div class="top-menu-title">系统弹窗</div>
             <div class="menu-actions">
               <button id="loreButton" class="menu-button" type="button">背景说明</button>
+              <button id="clueButton" class="menu-button" type="button">线索脉络</button>
               <button id="archiveButton" class="menu-button" type="button">痕迹档案</button>
               <a class="menu-button" href="./story-dev.html">剧情后台</a>
             </div>
@@ -175,13 +185,32 @@
         <section class="modal-panel archive-modal-panel" role="dialog" aria-modal="true" aria-labelledby="archiveTitle">
           <div class="modal-heading">
             <h2 id="archiveTitle">痕迹档案</h2>
-            <button id="closeArchiveButton" class="icon-button" type="button" aria-label="关闭痕迹档案">×</button>
+            <button id="closeArchiveButton" class="icon-button" type="button" aria-label="关闭弹窗">×</button>
           </div>
           <div id="archiveModalContent" class="archive-modal-content"></div>
         </section>
       </div>
     </div>
 
-    <script type="module" src="./src/main.js?v=0.9.25"></script>
+    <section id="cluePage" class="clue-page" hidden aria-label="线索脉络图">
+      <div id="cluePageContent" class="clue-page-content"></div>
+    </section>
+
+    <div id="audioPromptModal" class="modal-backdrop audio-prompt-backdrop" hidden>
+      <section class="modal-panel audio-prompt-panel" role="dialog" aria-modal="true" aria-labelledby="audioPromptTitle">
+        <div class="audio-prompt-content">
+          <div class="audio-prompt-mark" aria-hidden="true">♪</div>
+          <p class="eyebrow">推荐开启</p>
+          <h2 id="audioPromptTitle">旧城需要一点声音</h2>
+          <p>建议使用音效游玩。低频氛围音会随觉醒变化，事件回执也会有更完整的反馈。</p>
+          <div class="audio-prompt-actions">
+            <button id="enableAudioPromptButton" class="menu-button primary" type="button">开启音效</button>
+            <button id="skipAudioPromptButton" class="menu-button" type="button">暂不开启</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script type="module" src="./src/main.js?v=0.9.45"></script>
   </body>
 </html>

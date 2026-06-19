@@ -1,6 +1,6 @@
 {
   "name": "doomsday-echo-web",
-  "version": "0.9.25",
+  "version": "0.9.45",
   "private": true,
   "type": "module",
   "scripts": {
@@ -8,7 +8,7 @@
     "build": "node tools/build-static.mjs",
     "phone:preview": "node tools/start-phone-preview.mjs",
     "secure-preview": "node tools/secure-preview.mjs",
-    "check": "node --check src/main.js && node --check src/worker.js"
+    "check": "node --check src/main.js && node --check src/story-dev-rewrite.js && node --check src/worker.js && node --check tools/audit-story-flow.mjs && node tools/audit-story-flow.mjs"
   },
   "devDependencies": {
     "wrangler": "^4.100.0"
